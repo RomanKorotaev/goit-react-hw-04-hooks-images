@@ -3,16 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://RomanKorotaev.github.io/goit-react-hw-04-hooks-images",
+ 
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "gh-pages": "^3.2.3",
+    "modern-normalize": "^1.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-loader-spinner": "^4.0.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
   },
+
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -38,5 +42,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  
+  "devDependencies": {
+    "prop-types": "^15.7.2"
   }
+
 }
