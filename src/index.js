@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import AppHooks from './AppHooks'
 import reportWebVitals from './reportWebVitals';
 
 import s from './App.module.css'
@@ -9,6 +10,7 @@ import s from './App.module.css'
 ReactDOM.render(
   <React.StrictMode>
     <App className={s.App}/>
+    {/* <AppHooks className={s.App}/> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

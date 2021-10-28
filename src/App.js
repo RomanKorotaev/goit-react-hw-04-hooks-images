@@ -1,8 +1,14 @@
 import React, {Component} from 'react';
 import ImageApiService from './js/apiService'
 import Searchbar from './components/Searchbar'
+
 import ImageGallery from './components/ImageGallery'
+import ImageGalleryHooks from './components/ImageGallery/ImageGalleryHooks'
+
+
 import Button from './components/Button'
+import ButtonHooks from './components/Button/ButtonHooks'
+
 import Modal from './components/Modal'
 
 import Loader from "react-loader-spinner";
@@ -119,8 +125,6 @@ toggleModal = ()=> {
 
 
 
-
-
   render () {
 
     const {imagesArray, showModal, largeImageURL,isLoading } = this.state;
@@ -144,12 +148,12 @@ toggleModal = ()=> {
           />
         )}
 
-       <ImageGallery 
-       imagesArray= {imagesArray}
-       onImgClick = {this.handleOnImgClick}/>
+       <ImageGallery imagesArray= {imagesArray} onImgClick = {this.handleOnImgClick}/>
+       {/* <ImageGalleryHooks imagesArray= {imagesArray} onImgClick = {this.handleOnImgClick}/> */}
         
         {!isLoading && (  
-        <Button onLoadMoreBtn = {this.handleLoadMore}/>
+        // <Button onLoadMoreBtn = {this.handleLoadMore}/>
+        <ButtonHooks onLoadMoreBtn = {this.handleLoadMore}/>
         )}
 
 

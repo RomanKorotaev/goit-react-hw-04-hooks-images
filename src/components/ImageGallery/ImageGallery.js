@@ -5,10 +5,7 @@ import ImageGalleryItem from '../ImageGalleryItem'
 
 class ImageGallery extends Component {
 
-    state = {
-        imagesArray: [],
-      }
-
+    
 onImgClickImageGallery = (largeImageURL) => {
   console.log ('Сработала функция onImgClickImageGallery. Клинули на  Img   . largeImageURL = ', largeImageURL);
 this.props.onImgClick(largeImageURL)
