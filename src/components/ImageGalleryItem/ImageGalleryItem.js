@@ -11,7 +11,7 @@ class ImageGalleryItem extends Component {
         id: this.props.id 
       }
 
-      onImgClickImageGalleryItem = event=> { 
+    onImageClick= event=> { 
         console.log ('Сработала функция onImgClickImageGalleryItem. Клинули на  Img . ', event);
         this.props.onImgClickImageGalleryItem(this.state.largeImageURL);
     }
@@ -23,7 +23,7 @@ class ImageGalleryItem extends Component {
             src={webformatURL}
             alt={tags}
             className={s.ImageGalleryItemImage}
-            onClick = {this.onImgClickImageGalleryItem}
+            onClick = {this.onImageClick}
             id={this.state.id}/>
         )
     }

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItemHooks'
 import ImageGalleryItemHooks from  '../ImageGalleryItem/ImageGalleryItemHooks'
 
-function ImageGalleryHooks ( imagesArray, onImgClick){
+function ImageGalleryHooks ( {imagesArray, onImgClick} ){
 
           const onImgClickImageGallery = (largeImageURL) => {
             console.log ('Сработала функция onImgClickImageGallery. Клинули на  Img   . largeImageURL = ', largeImageURL);

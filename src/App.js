@@ -150,8 +150,8 @@ toggleModal = ()=> {
           />
         )}
 
-       <ImageGallery imagesArray= {imagesArray} onImgClick = {this.handleOnImgClick}/>
-       {/* <ImageGalleryHooks imagesArray= {imagesArray} onImgClick = {this.handleOnImgClick}/> */}
+       {/* <ImageGallery imagesArray= {imagesArray} onImgClick = {this.handleOnImgClick}/> */}
+       <ImageGalleryHooks imagesArray= {imagesArray} onImgClick = {this.handleOnImgClick}/>
         
         {!isLoading && (  
         // <Button onLoadMoreBtn = {this.handleLoadMore}/>
