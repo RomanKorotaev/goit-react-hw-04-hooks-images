@@ -12,6 +12,7 @@ import Button from './components/Button'
 import ButtonHooks from './components/Button/ButtonHooks'
 
 import Modal from './components/Modal'
+import ModalHooks from './components/Modal/ModalHooks'
 
 import Loader from "react-loader-spinner";
 
@@ -160,9 +161,14 @@ toggleModal = ()=> {
 
 
        {/* Рендерим по условию модалку с любым дочерним элементом/содержимым - через props.children         */}
-        { showModal && <Modal onModalClose={this.toggleModal}>
+        {/* { showModal && <Modal onModalClose={this.toggleModal}>
           <img src={largeImageURL} alt="picture" />
-          </Modal> }
+          </Modal> } */}
+
+          { showModal && <ModalHooks onModalClose={this.toggleModal}>
+          <img src={largeImageURL} alt="picture" />
+          </ModalHooks> }
+
       </div>
     )
   }

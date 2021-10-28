@@ -9,8 +9,8 @@ import s from './App.module.css'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App className={s.App}/>
-    {/* <AppHooks className={s.App}/> */}
+    {/* <App className={s.App}/> */}
+    <AppHooks className={s.App}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

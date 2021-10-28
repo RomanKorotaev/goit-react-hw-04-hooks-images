@@ -1,20 +1,24 @@
 import React, {useState, useEffect, useRef} from 'react';
 import ImageApiService from './js/apiService'
+
+
 import Searchbar from './components/Searchbar'
+import SearchbarHooks from './components/Searchbar/SearchbarHooks'
 
 import ImageGallery from './components/ImageGallery'
 import ImageGalleryHooks from './components/ImageGallery/ImageGalleryHooks'
+
 
 import Button from './components/Button'
 import ButtonHooks from './components/Button/ButtonHooks'
 
 import Modal from './components/Modal'
+import ModalHooks from './components/Modal/ModalHooks'
 
 import Loader from "react-loader-spinner";
 
 
 const imageApiService = new ImageApiService();
-
 
 
  function AppHooks () {
@@ -48,10 +52,12 @@ const imageApiService = new ImageApiService();
 
 // Обновление компонента: поиск по заданному слову
       useEffect ( ()=> {
-        // if ( quiryWord !== prevState.quiryWord) {
-        if ( quiryWord !==quiryWord) {
+      
+        if ( quiryWord !== prevState.quiryWord) {
+       
+                 
+          console.log ("Второй useEffect - INNER")
 
-               
             imageApiService.resetPage(); // перед каждым новым запросом сбрасываем на 1 (первая в числе пагинации с бекенда)
             imageApiService.query = setQuiryWord; // обновляем значение поискового слова
         
@@ -63,18 +69,15 @@ const imageApiService = new ImageApiService();
                       // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
                       if (hits.length !== 0) { 
                         setImagesArray ( hits )
-                        console.log (" Записали hits  в   - imagesArray через хуки", imagesArray );
+                        console.log (" Записали hits  в   - imagesArray через хуки (аналог componentDidUpdate )", imagesArray );
                       }
                 })
                 .catch(() => {
                     alert("Something wrong. Please try again later");
                   })
-                .finally( ()=> {
-                    // setQuiryWord ('')
-                    setIsLoading(false);
-                } );
+                .finally( ()=> { setIsLoading(false);  } );
               }, 1000);
-        }
+         }
 
       }, [quiryWord, isLoading, imagesArray ] )
 
@@ -122,8 +125,8 @@ const imageApiService = new ImageApiService();
 
       return (
         <div>
-          <Searchbar onSubmit= {handleSummitForm}/>
-             
+         <SearchbarHooks onSubmit= {handleSummitForm}/>
+
         {isLoading && (
             <Loader
               className="Loader"
@@ -134,19 +137,19 @@ const imageApiService = new ImageApiService();
             />
           )}
   
-         <ImageGallery 
-         imagesArray= {imagesArray}
-         onImgClick = {handleOnImgClick}/>
+  <ImageGalleryHooks
+   imagesArray= {imagesArray}
+    onImgClick = {handleOnImgClick}/>
           
-          {!isLoading && (  
-          <Button onLoadMoreBtn = {handleLoadMore}/>
-          )}
+        {!isLoading && (  
+          <ButtonHooks onLoadMoreBtn = {handleLoadMore}/>
+        )}
   
   
-         {/* Рендерим по условию модалку с любым дочерним элементом/содержимым - через props.children         */}
-          { showModal && <Modal onModalClose={toggleModal}>
-            <img src={largeImageURL} alt="Some Img" />
-            </Modal> }
+        { showModal && <ModalHooks onModalClose={toggleModal}>
+          <img src={largeImageURL} alt="picture" />
+        </ModalHooks> }
+
         </div>
       )
 }
