@@ -1,8 +1,13 @@
 import React, {useState, useEffect, useRef} from 'react';
 import ImageApiService from './js/apiService'
 import Searchbar from './components/Searchbar'
+
 import ImageGallery from './components/ImageGallery'
+import ImageGalleryHooks from './components/ImageGallery/ImageGalleryHooks'
+
 import Button from './components/Button'
+import ButtonHooks from './components/Button/ButtonHooks'
+
 import Modal from './components/Modal'
 
 import Loader from "react-loader-spinner";
@@ -44,7 +49,7 @@ const imageApiService = new ImageApiService();
 // Обновление компонента: поиск по заданному слову
       useEffect ( ()=> {
         // if ( quiryWord !== prevState.quiryWord) {
-        if ( quiryWord) {
+        if ( quiryWord !==quiryWord) {
 
                
             imageApiService.resetPage(); // перед каждым новым запросом сбрасываем на 1 (первая в числе пагинации с бекенда)
@@ -65,7 +70,7 @@ const imageApiService = new ImageApiService();
                     alert("Something wrong. Please try again later");
                   })
                 .finally( ()=> {
-                    setQuiryWord ('')
+                    // setQuiryWord ('')
                     setIsLoading(false);
                 } );
               }, 1000);

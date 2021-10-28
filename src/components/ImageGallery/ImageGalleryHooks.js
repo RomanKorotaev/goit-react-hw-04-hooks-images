@@ -1,12 +1,13 @@
 import React  from 'react';
 import s from './ImageGallery.module.css'
 import PropTypes from 'prop-types';
-import ImageGalleryItem from '../ImageGalleryItem'
 
+import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItemHooks'
+import ImageGalleryItemHooks from  '../ImageGalleryItem/ImageGalleryItemHooks'
 
-function ImageGalleryHooks ( {imagesArray, onImgClick}){
+function ImageGalleryHooks ( imagesArray, onImgClick){
 
-            const onImgClickImageGallery = (largeImageURL) => {
+          const onImgClickImageGallery = (largeImageURL) => {
             console.log ('Сработала функция onImgClickImageGallery. Клинули на  Img   . largeImageURL = ', largeImageURL);
             onImgClick(largeImageURL)
           }
@@ -16,7 +17,7 @@ function ImageGalleryHooks ( {imagesArray, onImgClick}){
             <ul className={s.ImageGallery}>
             { imagesArray.map(({id, webformatURL, largeImageURL, tags }) => (
               <li  key = {id}>
-                  <ImageGalleryItem 
+                  <ImageGalleryItemHooks 
                     webformatURL={webformatURL}
                     largeImageURL={largeImageURL}
                     tags={tags}

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import s from './ImageGallery.module.css'
 import PropTypes from 'prop-types';
 import ImageGalleryItem from '../ImageGalleryItem'
+import ImageGalleryItemHooks from  '../ImageGalleryItem/ImageGalleryItemHooks'
 
 class ImageGallery extends Component {
 
@@ -17,7 +18,7 @@ this.props.onImgClick(largeImageURL)
                   <ul className={s.ImageGallery}>
                   { imagesArray.map(({id, webformatURL, largeImageURL, tags }) => (
                     <li  key = {id}>
-                        <ImageGalleryItem 
+                        <ImageGalleryItem
                           webformatURL={webformatURL}
                           largeImageURL={largeImageURL}
                           tags={tags}

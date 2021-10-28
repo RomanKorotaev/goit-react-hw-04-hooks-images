@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import ImageApiService from './js/apiService'
+
 import Searchbar from './components/Searchbar'
+import SearchbarHooks from './components/Searchbar/SearchbarHooks'
 
 import ImageGallery from './components/ImageGallery'
 import ImageGalleryHooks from './components/ImageGallery/ImageGalleryHooks'
@@ -133,11 +135,11 @@ toggleModal = ()=> {
     return (
       <div>
        
-       {/* Внимание! Важный синтаксис. Вот как в данном случае правильно пеередавать метот класса как пром в дочерний react-компонент  */}
-        <Searchbar onSubmit= {this.handleSummitForm}/>
+       {/* Внимание! Важный синтаксис. Вот как в данном случае правильно пеередавать метод класса как проп в дочерний react-компонент  */}
+        {/* <Searchbar onSubmit= {this.handleSummitForm}/> */}
+        <SearchbarHooks onSubmit= {this.handleSummitForm}/>
      
-      {/* {this.state.isLoading && <Loader />}   */}
-
+      
       {isLoading && (
           <Loader
             className="Loader"
