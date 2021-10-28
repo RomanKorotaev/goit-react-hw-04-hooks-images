@@ -83,7 +83,7 @@ const imageApiService = new ImageApiService();
 
       const handleSummitForm = quiryWord => {
         console.log("Вызвана функция handleSummitForm = (quiryWord) : ", quiryWord);
-        setQuiryWord (quiryWord) // пример записи короткого свойства. Аналог: {quiryWord : quiryWord } , где второе слово- это полученный аргумент функции
+        setQuiryWord (quiryWord) 
       }
 
       const handleLoadMore = () => {
