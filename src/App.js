@@ -31,27 +31,26 @@ state = {
 }
 
 
+// componentDidMount () {
 
-componentDidMount () {
+//   console.log (" App: componentDidMount ()");
+// this.setState ({ isLoading: true})
 
-  console.log (" App: componentDidMount ()");
-this.setState ({ isLoading: true})
-
-setTimeout(() => {
+// setTimeout(() => {
   
-      imageApiService.fetchImages()
-      .then (hits=>{
-            // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
-            if (hits.length !== 0) { 
-              this.setState ({imagesArray:  hits })
-              console.log (" Записали hits  в  стейт - imagesArray", this.state.imagesArray );
-            }
-      })
-      .finally( ()=> this.setState({isLoading: false}));
+//       imageApiService.fetchImages()
+//       .then (hits=>{
+//             // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
+//             if (hits.length !== 0) { 
+//               this.setState ({imagesArray:  hits })
+//               console.log (" Записали hits  в  стейт - imagesArray", this.state.imagesArray );
+//             }
+//       })
+//       .finally( ()=> this.setState({isLoading: false}));
       
-}, 1000);
+// }, 1000);
 
-}
+// }
 
 componentDidUpdate (prevProp, prevState) {
 

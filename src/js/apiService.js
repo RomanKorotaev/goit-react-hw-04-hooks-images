@@ -7,7 +7,8 @@ const BASE_URL = 'pixabay.com/api'
 
      constructor() {
          //По умолчанию для первой загрузки будет запрос на картинки природы
-         this.searchQuery = 'nature';
+        //  this.searchQuery = 'nature';
+        this.searchQuery = '';
          this.page = 1;
     };
     

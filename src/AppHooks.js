@@ -30,61 +30,67 @@ const imageApiService = new ImageApiService();
 
 
     //  Первая загрузка картинок по умолчанию
-     useEffect ( ()=> {
-        setIsLoading (true);
+    //  useEffect ( ()=> {
+    //     setIsLoading (true);
 
-        setTimeout(() => {
+    //     setTimeout(() => {
   
-            imageApiService.fetchImages()
-            .then (hits=>{
-                  // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
-                  if (hits.length !== 0) { 
-                        setImagesArray ( hits);
-                    console.log (" Первая загрузка. По умолчанию грузим картинки природы. Записали hits (полученный первый массив картинок)  в  хук через setImagesArray", imagesArray );
-                  }
-            })
-            .finally( ()=>  setIsLoading (false));
+    //         imageApiService.fetchImages()
+    //         .then (hits=>{
+    //               // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
+    //               if (hits.length !== 0) { 
+    //                     setImagesArray ( hits);
+    //                 console.log (" Первая загрузка. По умолчанию грузим картинки природы. Записали hits (полученный первый массив картинок)  в  хук через setImagesArray", imagesArray );
+    //               }
+    //         })
+    //         .finally( ()=>  setIsLoading (false));
             
-      }, 1000);
+    //   }, 1000);
 
-    }, [])
+    // }, [])
+
+
 
 
 // Обновление компонента: поиск по заданному слову
-      useEffect ( ()=> {
-      
-        if ( quiryWord !== prevState.quiryWord) {
-       
-                 
-          console.log ("Второй useEffect - INNER")
+      useEffect ( ()=> {   
+        console.log ("Вызвана функция  useEffect .  Значение quiryWord =", quiryWord )    
+            if(quiryWord === "") {
+              console.log ("quiryWord === пустая строка")
+              return;
+            } else {  console.log ("quiryWord =",  quiryWord) }
+////---------------------   
 
-            imageApiService.resetPage(); // перед каждым новым запросом сбрасываем на 1 (первая в числе пагинации с бекенда)
-            imageApiService.query = setQuiryWord; // обновляем значение поискового слова
-        
-            setIsLoading (true);
+imageApiService.resetPage(); // перед каждым новым запросом сбрасываем на 1 (первая в числе пагинации с бекенда)
+imageApiService.query = quiryWord; // обновляем значение поискового слова
 
-            setTimeout(() => {
-                imageApiService.fetchImages()
-                .then (hits=>{
-                      // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
-                      if (hits.length !== 0) { 
-                        setImagesArray ( hits )
-                        console.log (" Записали hits  в   - imagesArray через хуки (аналог componentDidUpdate )", imagesArray );
-                      }
-                })
-                .catch(() => {
-                    alert("Something wrong. Please try again later");
-                  })
-                .finally( ()=> { setIsLoading(false);  } );
-              }, 1000);
-         }
-
-      }, [quiryWord, isLoading, imagesArray ] )
+setIsLoading (true);
+console.log (" Сработала функция setIsLoading (true)")
+// setTimeout(() => {
+    imageApiService.fetchImages()
+    .then (hits=>{
+          // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
+          if (hits.length !== 0) { 
+            setImagesArray ( [...hits ] )
+            console.log (" Записали hits  в   - imagesArray через хуки (аналог componentDidUpdate )", imagesArray );
+          }
+    })
+    .catch(() => {
+        alert("Something wrong. Please try again later");
+      })
+    .finally( ()=> { 
+      setIsLoading(false);
+    console.log ("Сработала функция setIsLoading(false)")
+    } );
+  // }, 1000);
+////---------------------                       
+      }, [quiryWord] )
 
       const handleSummitForm = quiryWord => {
         console.log("Вызвана функция handleSummitForm = (quiryWord) : ", quiryWord);
         setQuiryWord (quiryWord) 
       }
+
 
       const handleLoadMore = () => {
         console.log(" Сработала функция handleLoadMore ");
@@ -95,14 +101,8 @@ const imageApiService = new ImageApiService();
             .then (hits=>{
               if (hits.length !== 0) {
                
-                //    this.setState ( (prevState) =>{
-                //         return {
-                //             imagesArray: [...prevState.imagesArray, ...hits]
-                //         } 
-                // } )
-
-                setImagesArray (...imagesArray, ...hits);
-                
+                setImagesArray ( (prevState) => [...prevState, ...hits]);
+                                
               }   
       
               window.scrollTo({
@@ -156,3 +156,5 @@ const imageApiService = new ImageApiService();
 
 
 export default  AppHooks;
+
+
