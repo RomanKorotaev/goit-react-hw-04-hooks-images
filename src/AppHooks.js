@@ -29,33 +29,31 @@ const imageApiService = new ImageApiService();
      const [ isLoading, setIsLoading] = useState (false);
 
 
-    //  Первая загрузка картинок по умолчанию
-    //  useEffect ( ()=> {
-    //     setIsLoading (true);
+    //  Первая загрузка. По умолчанию грузим картинки природы.
+     useEffect ( ()=> {
+        setIsLoading (true);
 
-    //     setTimeout(() => {
+        setTimeout(() => {
   
-    //         imageApiService.fetchImages()
-    //         .then (hits=>{
-    //               // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
-    //               if (hits.length !== 0) { 
-    //                     setImagesArray ( hits);
-    //                 console.log (" Первая загрузка. По умолчанию грузим картинки природы. Записали hits (полученный первый массив картинок)  в  хук через setImagesArray", imagesArray );
-    //               }
-    //         })
-    //         .finally( ()=>  setIsLoading (false));
+            imageApiService.fetchImages()
+            .then (hits=>{
+                  // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
+                  if (hits.length !== 0) { 
+                        setImagesArray ( [...hits ]); // ВАЖНО СИНТАКСИС: именно так в данной функции записываем массив
+                    console.log (" Первая загрузка. По умолчанию грузим картинки природы. Записали hits (полученный первый массив картинок)  в  хук через setImagesArray", imagesArray );
+                  }
+            })
+            .finally( ()=>  setIsLoading (false));
             
-    //   }, 1000);
+      }, 1000);
 
-    // }, [])
-
+    }, [])
 
 
 
 // Обновление компонента: поиск по заданному слову
       useEffect ( ()=> {   
-        console.log ("Вызвана функция  useEffect .  Значение quiryWord =", quiryWord )    
-            if(quiryWord === "") {
+              if(quiryWord === "") {
               console.log ("quiryWord === пустая строка")
               return;
             } else {  console.log ("quiryWord =",  quiryWord) }
@@ -66,12 +64,12 @@ imageApiService.query = quiryWord; // обновляем значение пои
 
 setIsLoading (true);
 console.log (" Сработала функция setIsLoading (true)")
-// setTimeout(() => {
+setTimeout(() => {
     imageApiService.fetchImages()
     .then (hits=>{
           // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
           if (hits.length !== 0) { 
-            setImagesArray ( [...hits ] )
+            setImagesArray ( [...hits ] ) // ВАЖНО СИНТАКСИС: именно так в данной функции записываем массив
             console.log (" Записали hits  в   - imagesArray через хуки (аналог componentDidUpdate )", imagesArray );
           }
     })
@@ -80,29 +78,29 @@ console.log (" Сработала функция setIsLoading (true)")
       })
     .finally( ()=> { 
       setIsLoading(false);
-    console.log ("Сработала функция setIsLoading(false)")
     } );
-  // }, 1000);
-////---------------------                       
-      }, [quiryWord] )
+  }, 1000);
+
+  
+                     
+}, [quiryWord] )
 
       const handleSummitForm = quiryWord => {
         console.log("Вызвана функция handleSummitForm = (quiryWord) : ", quiryWord);
-        setQuiryWord (quiryWord) 
+        setQuiryWord (quiryWord) ;
       }
 
 
       const handleLoadMore = () => {
         console.log(" Сработала функция handleLoadMore ");
       
-             imageApiService.incerementPage();
+            imageApiService.incerementPage();
       
             imageApiService.fetchImages()
             .then (hits=>{
               if (hits.length !== 0) {
-               
-                setImagesArray ( (prevState) => [...prevState, ...hits]);
-                                
+                  // Обновляем предыдущее состояние массива данных и дописываем новые элементы
+                    setImagesArray ( (prevState) => [...prevState, ...hits]);                 
               }   
       
               window.scrollTo({
@@ -113,9 +111,7 @@ console.log (" Сработала функция setIsLoading (true)")
       }
 
       const handleOnImgClick = (largeImageURL) => {
-        console.log ('Сработала функция handleOnImgClick. Клинули на  Img   .   largeImageURL = ', largeImageURL);
         setLargeImageURL (largeImageURL)
-      
         toggleModal();
       }
      
@@ -149,7 +145,6 @@ console.log (" Сработала функция setIsLoading (true)")
         { showModal && <ModalHooks onModalClose={toggleModal}>
           <img src={largeImageURL} alt="picture" />
         </ModalHooks> }
-
         </div>
       )
 }
