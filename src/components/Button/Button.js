@@ -5,7 +5,6 @@ class Button extends Component {
 
     handleClickBtn = event=> {
         console.log ('Сработала функция handleClickBtn. Клинули на кнопке Загрузить ещё ', event);
-      
         this.props.onLoadMoreBtn();
 
         // Прокрутка страницы вниз до кнопки Load more
@@ -13,9 +12,9 @@ class Button extends Component {
             top: document.documentElement.scrollHeight,
             behavior: 'smooth',
           });
-
- 
     }
+
+  
 
     render() {
         return (
