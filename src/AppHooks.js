@@ -1,20 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import ImageApiService from './js/apiService'
-
-
-import Searchbar from './components/Searchbar'
 import SearchbarHooks from './components/Searchbar/SearchbarHooks'
-
-import ImageGallery from './components/ImageGallery'
 import ImageGalleryHooks from './components/ImageGallery/ImageGalleryHooks'
-
-
-// import Button from './components/Button'
 import ButtonHooks from './components/Button/ButtonHooks'
-
-import Modal from './components/Modal'
 import ModalHooks from './components/Modal/ModalHooks'
-
 import Loader from "react-loader-spinner";
 
 
