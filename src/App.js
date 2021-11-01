@@ -1,43 +1,67 @@
-import React, {Component} from 'react';
-import ImageApiService from './js/apiService'
+// import React, {Component} from 'react';
+// import ImageApiService from './js/apiService'
 
-import Searchbar from './components/Searchbar'
-import SearchbarHooks from './components/Searchbar/SearchbarHooks'
+// import Searchbar from './components/Searchbar'
+// import SearchbarHooks from './components/Searchbar/SearchbarHooks'
 
-import ImageGallery from './components/ImageGallery'
-import ImageGalleryHooks from './components/ImageGallery/ImageGalleryHooks'
-
-
-import Button from './components/Button'
-import ButtonHooks from './components/Button/ButtonHooks'
-
-import Modal from './components/Modal'
-import ModalHooks from './components/Modal/ModalHooks'
-
-import Loader from "react-loader-spinner";
+// import ImageGallery from './components/ImageGallery'
+// import ImageGalleryHooks from './components/ImageGallery/ImageGalleryHooks'
 
 
-const imageApiService = new ImageApiService();
+// import Button from './components/Button'
+// import ButtonHooks from './components/Button/ButtonHooks'
+
+// import Modal from './components/Modal'
+// import ModalHooks from './components/Modal/ModalHooks'
+
+// import Loader from "react-loader-spinner";
 
 
-class App extends Component {
-
-state = {
-  imagesArray: [],
-  quiryWord: "",
-  largeImageURL: '',
-  showModal: false,
-  isLoading: false,
-}
+// const imageApiService = new ImageApiService();
 
 
-// componentDidMount () {
+// class App extends Component {
 
-//   console.log (" App: componentDidMount ()");
-// this.setState ({ isLoading: true})
+// state = {
+//   imagesArray: [],
+//   quiryWord: "",
+//   largeImageURL: '',
+//   showModal: false,
+//   isLoading: false,
+// }
 
-// setTimeout(() => {
+
+// // componentDidMount () {
+
+// //   console.log (" App: componentDidMount ()");
+// // this.setState ({ isLoading: true})
+
+// // setTimeout(() => {
   
+// //       imageApiService.fetchImages()
+// //       .then (hits=>{
+// //             // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
+// //             if (hits.length !== 0) { 
+// //               this.setState ({imagesArray:  hits })
+// //               console.log (" Записали hits  в  стейт - imagesArray", this.state.imagesArray );
+// //             }
+// //       })
+// //       .finally( ()=> this.setState({isLoading: false}));
+      
+// // }, 1000);
+
+// // }
+
+// componentDidUpdate (prevProp, prevState) {
+
+//   if ( this.state.quiryWord !== prevState.quiryWord) {
+    
+//     imageApiService.resetPage(); // перед каждым новым запросом сбрасываем на 1 (первая в числе пагинации с бекенда)
+//     imageApiService.query = this.state.quiryWord; // обновляем значение поискового слова
+
+//     this.setState ({ isLoading: true})
+
+//     setTimeout(() => {
 //       imageApiService.fetchImages()
 //       .then (hits=>{
 //             // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
@@ -47,131 +71,107 @@ state = {
 //             }
 //       })
 //       .finally( ()=> this.setState({isLoading: false}));
-      
-// }, 1000);
+//     }, 1000);
+    
+//   }
+//  }
 
+ 
+ 
+
+// handleSummitForm = quiryWord => {
+//   console.log("Вызвана функция handleSummitForm = (quiryWord) : ", quiryWord);
+//   this.setState ({quiryWord}) // пример записи короткого свойства. Аналог: {quiryWord : quiryWord } , где второе слово- это полученный аргумент функции
 // }
 
-componentDidUpdate (prevProp, prevState) {
+// handleLoadMore = () => {
+//   console.log(" Сработала функция handleLoadMore ");
 
-  if ( this.state.quiryWord !== prevState.quiryWord) {
-    
-    imageApiService.resetPage(); // перед каждым новым запросом сбрасываем на 1 (первая в числе пагинации с бекенда)
-    imageApiService.query = this.state.quiryWord; // обновляем значение поискового слова
+//        imageApiService.incerementPage();
 
-    this.setState ({ isLoading: true})
+//       imageApiService.fetchImages()
+//       .then (hits=>{
+//         if (hits.length !== 0) {
+//              this.setState ( (prevState) =>{
+//                   return {
+//                       imagesArray: [...prevState.imagesArray, ...hits]
+//                   } 
+//           } )
+//         }   
 
-    setTimeout(() => {
-      imageApiService.fetchImages()
-      .then (hits=>{
-            // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
-            if (hits.length !== 0) { 
-              this.setState ({imagesArray:  hits })
-              console.log (" Записали hits  в  стейт - imagesArray", this.state.imagesArray );
-            }
-      })
-      .finally( ()=> this.setState({isLoading: false}));
-    }, 1000);
-    
-  }
- }
+//         window.scrollTo({
+//                   top: document.documentElement.scrollHeight,
+//                   behavior: 'smooth',
+//                 });
+//       });   
+// }
 
+// handleOnImgClick = (largeImageURL) => {
+//   console.log ('Сработала функция handleOnImgClick. Клинули на  Img   .   largeImageURL = ', largeImageURL);
+//   this.setState ({largeImageURL:  largeImageURL })
+
+//   this.toggleModal();
+// }
+
+// // toggleModal = ()=> {
+// //   this.setState (prevState=> ({
+// //     showModal: !this.state.showModal
+// //   }))
+// // }
  
- 
-
-handleSummitForm = quiryWord => {
-  console.log("Вызвана функция handleSummitForm = (quiryWord) : ", quiryWord);
-  this.setState ({quiryWord}) // пример записи короткого свойства. Аналог: {quiryWord : quiryWord } , где второе слово- это полученный аргумент функции
-}
-
-handleLoadMore = () => {
-  console.log(" Сработала функция handleLoadMore ");
-
-       imageApiService.incerementPage();
-
-      imageApiService.fetchImages()
-      .then (hits=>{
-        if (hits.length !== 0) {
-             this.setState ( (prevState) =>{
-                  return {
-                      imagesArray: [...prevState.imagesArray, ...hits]
-                  } 
-          } )
-        }   
-
-        window.scrollTo({
-                  top: document.documentElement.scrollHeight,
-                  behavior: 'smooth',
-                });
-      });   
-}
-
-handleOnImgClick = (largeImageURL) => {
-  console.log ('Сработала функция handleOnImgClick. Клинули на  Img   .   largeImageURL = ', largeImageURL);
-  this.setState ({largeImageURL:  largeImageURL })
-
-  this.toggleModal();
-}
-
 // toggleModal = ()=> {
-//   this.setState (prevState=> ({
-//     showModal: !this.state.showModal
+//   this.setState ( ({showModal})=> ({
+//     showModal: !showModal
 //   }))
 // }
- 
-toggleModal = ()=> {
-  this.setState ( ({showModal})=> ({
-    showModal: !showModal
-  }))
-}
 
 
 
-  render () {
+//   render () {
 
-    const {imagesArray, showModal, largeImageURL,isLoading } = this.state;
-    // const {handleOnImgClick, handleLoadMore} = this;
+//     const {imagesArray, showModal, largeImageURL,isLoading } = this.state;
+//     // const {handleOnImgClick, handleLoadMore} = this;
   
-    return (
-      <div>
+//     return (
+//       <div>
        
-       {/* Внимание! Важный синтаксис. Вот как в данном случае правильно пеередавать метод класса как проп в дочерний react-компонент  */}
-        {/* <Searchbar onSubmit= {this.handleSummitForm}/> */}
-        <SearchbarHooks onSubmit= {this.handleSummitForm}/>
+//        {/* Внимание! Важный синтаксис. Вот как в данном случае правильно пеередавать метод класса как проп в дочерний react-компонент  */}
+//         {/* <Searchbar onSubmit= {this.handleSummitForm}/> */}
+//         <SearchbarHooks onSubmit= {this.handleSummitForm}/>
      
       
-      {isLoading && (
-          <Loader
-            className="Loader"
-            type="Circles"
-            color="#00BFFF"
-            height={100}
-            width={100}
-          />
-        )}
+//       {isLoading && (
+//           <Loader
+//             className="Loader"
+//             type="Circles"
+//             color="#00BFFF"
+//             height={100}
+//             width={100}
+//           />
+//         )}
 
-       {/* <ImageGallery imagesArray= {imagesArray} onImgClick = {this.handleOnImgClick}/> */}
-       <ImageGalleryHooks imagesArray= {imagesArray} onImgClick = {this.handleOnImgClick}/>
+//        {/* <ImageGallery imagesArray= {imagesArray} onImgClick = {this.handleOnImgClick}/> */}
+//        <ImageGalleryHooks imagesArray= {imagesArray} onImgClick = {this.handleOnImgClick}/>
         
-        {!isLoading && (  
-        // <Button onLoadMoreBtn = {this.handleLoadMore}/>
-        <ButtonHooks onLoadMoreBtn = {this.handleLoadMore}/>
-        )}
+//         {!isLoading && (  
+//         // <Button onLoadMoreBtn = {this.handleLoadMore}/>
+//         <ButtonHooks onLoadMoreBtn = {this.handleLoadMore}/>
+//         )}
 
 
-       {/* Рендерим по условию модалку с любым дочерним элементом/содержимым - через props.children         */}
-        {/* { showModal && <Modal onModalClose={this.toggleModal}>
-          <img src={largeImageURL} alt="picture" />
-          </Modal> } */}
+//        {/* Рендерим по условию модалку с любым дочерним элементом/содержимым - через props.children         */}
+//         {/* { showModal && <Modal onModalClose={this.toggleModal}>
+//           <img src={largeImageURL} alt="picture" />
+//           </Modal> } */}
 
-          { showModal && <ModalHooks onModalClose={this.toggleModal}>
-          <img src={largeImageURL} alt="picture" />
-          </ModalHooks> }
+//           { showModal && <ModalHooks onModalClose={this.toggleModal}>
+//           <img src={largeImageURL} alt="picture" />
+//           </ModalHooks> }
 
-      </div>
-    )
-  }
-}
+//       </div>
+//     )
+//   }
+// }
 
-export default App;
+// export default App;
 

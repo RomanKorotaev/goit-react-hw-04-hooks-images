@@ -5,7 +5,7 @@ import s from './Button.module.css'
 function ButtonHooks ( { onLoadMoreBtn }) {
 
        const handleClickBtn = useCallback ( (event) => {
-        console.log ('Сработала функция handleClickBtn с применением хука useCallback.  Клинули на кнопке Загрузить ещё ', event);
+        console.log ('Сработала функция handleClickBtn с применением хука оптимизации useCallback.  Клинули на кнопке Загрузить ещё ', event);
         onLoadMoreBtn();
                 // Прокрутка страницы вниз до кнопки Load more
                 window.scrollTo({

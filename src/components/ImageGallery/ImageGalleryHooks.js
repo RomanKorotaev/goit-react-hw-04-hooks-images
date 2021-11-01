@@ -1,16 +1,16 @@
-import React  from 'react';
-import s from './ImageGallery.module.css'
+import React, { useCallback }  from 'react';
 import PropTypes from 'prop-types';
+import s from './ImageGallery.module.css';
 
-import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItemHooks'
+
 import ImageGalleryItemHooks from  '../ImageGalleryItem/ImageGalleryItemHooks'
 
 function ImageGalleryHooks ( {imagesArray, onImgClick} ){
 
-          const onImgClickImageGallery = (largeImageURL) => {
-            console.log ('Сработала функция onImgClickImageGallery. Клинули на  Img   . largeImageURL = ', largeImageURL);
-            onImgClick(largeImageURL)
-          }
+              const onImgClickImageGallery = useCallback ( largeImageURL => {
+              console.log ('Сработала функция onImgClickImageGallery через хук useCallback. Клинули на  Img   . largeImageURL = ', largeImageURL);
+              onImgClick(largeImageURL) }, [] )
+          
 
 
           return (
@@ -27,8 +27,19 @@ function ImageGalleryHooks ( {imagesArray, onImgClick} ){
               </li>
           ))}
              </ul>
-        )
-     
+        )    
 }
+
+ImageGalleryHooks.propTypes = {
+  imagesArray: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+      tags: PropTypes.string,
+    })
+  ),
+  onImgClick: PropTypes.func.isRequired
+};
 
 export default ImageGalleryHooks;

@@ -1,5 +1,5 @@
-import { func } from 'prop-types';
-import React, {Component, useEffect} from 'react';
+import PropTypes from 'prop-types';
+import React, {useCallback, useEffect} from 'react';
 import {createPortal} from 'react-dom'
 import s from './Modal.module.css'
 
@@ -17,22 +17,22 @@ function Modalhooks ({onModalClose, children}) {
         }
     }, []) 
 
-       const  handleKeyDown = event => {
-        console.log ("event.code = ", event.code );
-        
-        if (event.code==='Escape') {
-            console.log ("Нажали Escape")
-            onModalClose() 
-          } 
-    }
+          const handleKeyDown = useCallback ( event => {
+            console.log ("event.code = ", event.code );
+            
+            if (event.code==='Escape') {
+                console.log ("Нажали Escape.  Использовали хук для оптимизации useCallback")
+                onModalClose() 
+              } 
+        }, [])
 
-    const handleOverleyClick = event => {
+          const handleOverleyClick = useCallback ( event => {
             // Проверяем, чтобы кликнули действительно по бекдропу/оверлею и не прокликивался насквозь контент перед бекдропом
             if (event.target===event.currentTarget) {
-              console.log ("Кликнули в бекдроп!!!")
+              console.log ("Кликнули в бекдроп!!! Использовали хук для оптимизации useCallback")
               onModalClose();
             }
-          }
+          }, [])
 
           return  createPortal (
             <div className= {s.Overlay} onClick={handleOverleyClick}>
@@ -54,7 +54,9 @@ function Modalhooks ({onModalClose, children}) {
 
 }
 
-   
+Modalhooks.propTypes = {
+  onModalClose: PropTypes.func.isRequired
+};
 
 
 export default Modalhooks; 

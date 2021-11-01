@@ -1,37 +1,37 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import s from './ImageGalleryItem.module.css'
+// import React, {Component} from 'react';
+// import PropTypes from 'prop-types';
+// import s from './ImageGalleryItem.module.css'
 
-class ImageGalleryItem extends Component {
+// class ImageGalleryItem extends Component {
 
-    state = {
-        webformatURL: "",
-        largeImageURL:  this.props.largeImageURL,
-        tags:"",
-        id: this.props.id 
-      }
+//     state = {
+//         webformatURL: "",
+//         largeImageURL:  this.props.largeImageURL,
+//         tags:"",
+//         id: this.props.id 
+//       }
 
-    onImageClick= event=> { 
-        console.log ('Сработала функция onImgClickImageGalleryItem. Клинули на  Img . ', event);
-        this.props.onImgClickImageGalleryItem(this.state.largeImageURL);
-    }
+//     onImageClick= event=> { 
+//         console.log ('Сработала функция onImgClickImageGalleryItem. Клинули на  Img . ', event);
+//         this.props.onImgClickImageGalleryItem(this.state.largeImageURL);
+//     }
 
-    render() {
-                const {webformatURL, tags } = this.props;
-        return (
-        <img 
-            src={webformatURL}
-            alt={tags}
-            className={s.ImageGalleryItemImage}
-            onClick = {this.onImageClick}
-            id={this.state.id}/>
-        )
-    }
-}
+//     render() {
+//                 const {webformatURL, tags } = this.props;
+//         return (
+//         <img 
+//             src={webformatURL}
+//             alt={tags}
+//             className={s.ImageGalleryItemImage}
+//             onClick = {this.onImageClick}
+//             id={this.state.id}/>
+//         )
+//     }
+// }
 
-ImageGalleryItem.propTypes = {
-    webformatURL: PropTypes.string,
-};
+// ImageGalleryItem.propTypes = {
+//     webformatURL: PropTypes.string,
+// };
 
 
-export default ImageGalleryItem;
+// export default ImageGalleryItem;

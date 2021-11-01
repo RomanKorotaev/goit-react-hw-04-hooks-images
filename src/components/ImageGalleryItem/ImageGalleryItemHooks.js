@@ -22,7 +22,14 @@ function ImageGalleryItemHooks ( {webformatURL, largeImageURL, id, tags, onImgCl
             onClick = {onImageClick}
             id={idItem}/>
         )
-
 }
+
+ImageGalleryItemHooks.propTypes = {
+    webformatURL: PropTypes.string.isRequired,
+    largeImageURL: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    tags: PropTypes.string.isRequired,
+    onImgClickImageGalleryItem: PropTypes.func.isRequired
+  };
 
 export default ImageGalleryItemHooks;

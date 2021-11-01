@@ -9,7 +9,7 @@ import ImageGallery from './components/ImageGallery'
 import ImageGalleryHooks from './components/ImageGallery/ImageGalleryHooks'
 
 
-import Button from './components/Button'
+// import Button from './components/Button'
 import ButtonHooks from './components/Button/ButtonHooks'
 
 import Modal from './components/Modal'
