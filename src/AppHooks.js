@@ -110,8 +110,7 @@ setTimeout(() => {
 
       return (
         <div>
-         <SearchbarHooks onSubmit= {handleSummitForm}/>
-
+            <SearchbarHooks onFormSubmit= {handleSummitForm}/>
         {isLoading && (
             <Loader
               className="Loader"

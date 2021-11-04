@@ -1,7 +1,7 @@
 import React, {useState, useCallback} from 'react';
 import s from './Searchbar.module.css'
 
-function Searchbarhooks ( {onSubmit}) {
+function Searchbarhooks ( {onFormSubmit}) {
 
     const [quiryWord, setQuiryWord] = useState ('')
 
@@ -23,7 +23,8 @@ function Searchbarhooks ( {onSubmit}) {
           return;
         }
     
-         onSubmit(quiryWord);
+        onFormSubmit(quiryWord);
+       
         setQuiryWord (""); //делаем сброс поискового слова после сабмита формы (для новых вводов)
       };
 
