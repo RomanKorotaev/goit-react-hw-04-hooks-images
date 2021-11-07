@@ -166,11 +166,11 @@ if (status==='resolved') {
     </>)}
 
 
-if (status==='rejected') {
-  return  <>
- <SearchbarHooks onFormSubmit= {handleSummitForm}/>
-  <p><b>Oooops! Thomething wrong! :( </b></p> 
-  </>}
+// if (status==='rejected') {
+//   return  <>
+//  <SearchbarHooks onFormSubmit= {handleSummitForm}/>
+//   <p><b>Oooops! Thomething wrong! :( </b></p> 
+//   </>}
   
   
 }
