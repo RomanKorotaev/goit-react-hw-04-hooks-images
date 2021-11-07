@@ -6,8 +6,6 @@ const BASE_URL = 'pixabay.com/api'
  class ImageApiService {
 
      constructor() {
-         //По умолчанию для первой загрузки будет запрос на картинки природы
-        //  this.searchQuery = 'nature';
         this.searchQuery = '';
          this.page = 1;
     };
@@ -17,13 +15,13 @@ const BASE_URL = 'pixabay.com/api'
             return fetch(`https://${BASE_URL}/?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.page}&per_page=12&key=${KEY_API} `)
                     .then(response => response.json())
                     .then(data => {
-                        // if ( data.hits.length<1) {
-                        //     console.log ( " data.hits.length<1  НЕТ РЕЗУЛЬТАТОВ" );
-                        //     alert ("НЕТ РЕЗУЛЬТАТОВ")
-                        //     } 
-                        //         else {  return  data.hits; }
-                        console.log ( "ОТВЕТ", data)
-                        return  data.hits;
+                        if ( data.hits.length<1) {
+                            console.log ( " data.hits.length<1  No results from backend!" );
+                            alert ("No results from backend!")
+                            } 
+                                else {  return  data.hits; }
+                        // console.log ( "ОТВЕТ", data)
+                        // return  data.hits;
                     })
                     .catch (error  => {
                         console.log ("Произошла ошибка в ответе от бекенда: ", error)

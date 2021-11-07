@@ -30,6 +30,8 @@ const imageApiService = new ImageApiService();
             } else {  console.log ("quiryWord =",  quiryWord) }
   ////---------------------   
 
+
+
   imageApiService.resetPage(); // перед каждым новым запросом сбрасываем на 1 (первая в числе пагинации с бекенда)
   imageApiService.query = quiryWord; // обновляем значение поискового слова
 
@@ -60,6 +62,7 @@ const imageApiService = new ImageApiService();
         console.log ("err : ", err)
           setStatus ('rejected')
           alert("Something wrong!");
+          return err;
         });
     }, 1000);                    
 }, [quiryWord] )
@@ -70,7 +73,9 @@ console.log ("imagesArray после записи:", imagesArray)
       const handleSummitForm = quiryWord => {
         console.log("Вызвана функция handleSummitForm = (quiryWord) : ", quiryWord);
         setQuiryWord (quiryWord) ;
+        
       }
+
 
   // ------------------ Загрузить ещё  ------------------
       const handleLoadMore = () => {
@@ -105,6 +110,7 @@ console.log ("imagesArray после записи:", imagesArray)
                       });
             })
             .catch (rejected => {
+              console.log ("Ошибка при нажатии на кнопку ЗАГРУЗИТЬ ЕЩЁ", rejected)
               setStatus ('rejected')
             });   
       }
@@ -166,11 +172,11 @@ if (status==='resolved') {
     </>)}
 
 
-// if (status==='rejected') {
-//   return  <>
-//  <SearchbarHooks onFormSubmit= {handleSummitForm}/>
-//   <p><b>Oooops! Thomething wrong! :( </b></p> 
-//   </>}
+if (status==='rejected') {
+  return  <>
+ <SearchbarHooks onFormSubmit= {handleSummitForm}/>
+  <p><b>Oooops! Thomething wrong! Try againe! :( </b></p> 
+  </>}
   
   
 }

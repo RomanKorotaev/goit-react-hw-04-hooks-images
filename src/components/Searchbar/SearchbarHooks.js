@@ -8,17 +8,17 @@ function Searchbarhooks ( {onFormSubmit}) {
     const [quiryWord, setQuiryWord] = useState ('')
 
 
-      const handleQueryChange = useCallback (event => {
-        setQuiryWord ( event.currentTarget.value.toLowerCase() );
-       
-        console.log ('Сработала функция handleQueryChange с применением хука оптимизации useCallback. Значение this.state.quiryWord :', quiryWord)
-      }, [])
-
-      // const handleQueryChange = event => {
+      // const handleQueryChange = useCallback (event => {
       //   setQuiryWord ( event.currentTarget.value.toLowerCase() );
        
-      //   console.log ('Сработала функция handleQueryChange . Значение this.state.quiryWord :', quiryWord)
-      // };
+      //   console.log ('Сработала функция handleQueryChange с применением хука оптимизации useCallback. Значение this.state.quiryWord :', quiryWord)
+      // }, [])
+
+      const handleQueryChange = event => {
+        setQuiryWord ( event.currentTarget.value.toLowerCase() );
+       
+        console.log ('Сработала функция handleQueryChange . Значение this.state.quiryWord :', quiryWord)
+      };
 
 
 
