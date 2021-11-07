@@ -1,4 +1,7 @@
 import React, {useState, useEffect} from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import ImageApiService from './js/apiService'
 import SearchbarHooks from './components/Searchbar/SearchbarHooks'
 import ImageGalleryHooks from './components/ImageGallery/ImageGalleryHooks'
@@ -18,68 +21,51 @@ const imageApiService = new ImageApiService();
      const [status, setStatus] = useState( 'idel');
 
      const [ showModal, setShowModal] = useState (false);
-     const [ isLoading, setIsLoading] = useState (false);
-
-
-    // //  Первая загрузка. По умолчанию грузим картинки природы.
-    //  useEffect ( ()=> {
-    //     setIsLoading (true);
-
-    //     setTimeout(() => {
-  
-    //         imageApiService.fetchImages()
-    //         .then (hits=>{
-    //               // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
-    //               if (hits.length !== 0) { 
-    //                     setImagesArray ( [...hits ]); // ВАЖНО СИНТАКСИС: именно так в данной функции записываем массив
-    //                 console.log (" Первая загрузка. По умолчанию грузим картинки природы. Записали hits (полученный первый массив картинок)  в  хук через setImagesArray", imagesArray );
-    //               }
-    //         })
-    //         .finally( ()=>  setIsLoading (false));
-            
-    //   }, 1000);
-
-    // }, [])
-
-
-
+   
 // Обновление компонента: поиск по заданному слову
       useEffect ( ()=> {   
               if(quiryWord === "") {
               console.log ("quiryWord === пустая строка")
               return;
             } else {  console.log ("quiryWord =",  quiryWord) }
-////---------------------   
+  ////---------------------   
 
-imageApiService.resetPage(); // перед каждым новым запросом сбрасываем на 1 (первая в числе пагинации с бекенда)
-imageApiService.query = quiryWord; // обновляем значение поискового слова
+  imageApiService.resetPage(); // перед каждым новым запросом сбрасываем на 1 (первая в числе пагинации с бекенда)
+  imageApiService.query = quiryWord; // обновляем значение поискового слова
 
-setIsLoading (true);
-setStatus ('panding')
+ 
+  setStatus ('panding')
 
-console.log (" Сработала функция setIsLoading (true)")
-setTimeout(() => {
-    imageApiService.fetchImages()
-    .then (hits=>{
-          // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
-          if (hits.length !== 0) { 
-            setImagesArray ( [...hits ] ) // ВАЖНО СИНТАКСИС: именно так в данной функции записываем массив
-            console.log (" Записали hits  в   - imagesArray через хуки (аналог componentDidUpdate )", imagesArray );
-            setStatus ('resolved')
-          } else {alert("No images with such name!")}
-    })
-    .catch(() => {
-        setStatus ('resolved')
-        alert("Something wrong. Please try again later");
+  setTimeout(() => {
+      imageApiService.fetchImages()
+      .then (hits=>{
+            // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
+            if (hits.length !== 0) { 
+              setImagesArray ( [...hits ] ) // ВАЖНО СИНТАКСИС: именно так в данной функции записываем массив
+              console.log (" Записали hits  в   - imagesArray через хуки (аналог componentDidUpdate )", imagesArray );
+              setStatus ('resolved');
+
+                toast.success('Success!', {
+                  position: "top-right",
+                  autoClose: 4000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+              });  
+            } 
       })
-    .finally( ()=> { 
-      setIsLoading(false);
-    } );
-  }, 1000);
-
-  
-                     
+      .catch(err => {
+        console.log ("err : ", err)
+          setStatus ('rejected')
+          alert("Something wrong!");
+        });
+    }, 1000);                    
 }, [quiryWord] )
+
+
+console.log ("imagesArray после записи:", imagesArray)
 
       const handleSummitForm = quiryWord => {
         console.log("Вызвана функция handleSummitForm = (quiryWord) : ", quiryWord);
@@ -88,8 +74,10 @@ setTimeout(() => {
 
   // ------------------ Загрузить ещё  ------------------
       const handleLoadMore = () => {
-        console.log(" Сработала функция handleLoadMore ");
+        console.log(" Сработала функция handleLoadMore - КНОПКА ЗАГРУЗИТЬ ЕЩЁ ");
       
+        console.log("Значение поискового слова в классе : ", imageApiService.query)
+       
             imageApiService.incerementPage();
       
             imageApiService.fetchImages()
@@ -97,7 +85,18 @@ setTimeout(() => {
               if (hits.length !== 0) {
                   // Обновляем предыдущее состояние массива данных и дописываем новые элементы
                     setImagesArray ( (prevState) => [...prevState, ...hits]);
-                    setStatus ('resolved')                 
+                    console.log ("Запись массива через  ЗАГРУЗИТЬ ЕЩЁ" , imagesArray)
+                    setStatus ('resolved');
+                       
+                    toast.success('Success!', {
+                            position: "top-right",
+                            autoClose: 4000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });                
               }   
       
               window.scrollTo({
@@ -106,7 +105,6 @@ setTimeout(() => {
                       });
             })
             .catch (rejected => {
-              // alert("No images with such name!")
               setStatus ('rejected')
             });   
       }
@@ -140,7 +138,20 @@ setTimeout(() => {
 if (status==='resolved') {
   return (
     <>
+         <ToastContainer
+            position="top-right"
+            autoClose={4000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+
       <SearchbarHooks onFormSubmit= {handleSummitForm}/>
+
 
       <ImageGalleryHooks
       imagesArray= {imagesArray}
@@ -153,38 +164,15 @@ if (status==='resolved') {
          </ModalHooks> }  
 
     </>)}
-  
-     
 
-  //     return (
-  //       <div>
-  //           <SearchbarHooks onFormSubmit= {handleSummitForm}/>
 
-           
-  //       {isLoading && (
-  //           <Loader
-  //             className="Loader"
-  //             type="Circles"
-  //             color="#00BFFF"
-  //             height={100}
-  //             width={100}
-  //           />
-  //         )}
-  
-  // <ImageGalleryHooks
-  //  imagesArray= {imagesArray}
-  //   onImgClick = {handleOnImgClick}/>
-          
-  //       {!isLoading && (  
-  //         <ButtonHooks onLoadMoreBtn = {handleLoadMore}/>
-  //       )}
+if (status==='rejected') {
+  return  <>
+ <SearchbarHooks onFormSubmit= {handleSummitForm}/>
+  <p><b>Oooops! Thomething wrong! :( </b></p> 
+  </>}
   
   
-  //       { showModal && <ModalHooks onModalClose={toggleModal}>
-  //         <img src={largeImageURL} alt="picture" />
-  //       </ModalHooks> }
-  //       </div>
-  //     )
 }
 
 

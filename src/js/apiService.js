@@ -18,6 +18,9 @@ const BASE_URL = 'pixabay.com/api'
                     .then(response => response.json())
                     .then(data => {
                         return  data.hits;
+                    })
+                    .catch (error  => {
+                        console.log ("Произошла ошибка в ответе от бекенда: ", error)
                     });
     } 
 

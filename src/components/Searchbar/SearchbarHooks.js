@@ -1,5 +1,7 @@
 import React, {useState, useCallback} from 'react';
 import s from './Searchbar.module.css'
+import { ToastContainer , toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Searchbarhooks ( {onFormSubmit}) {
 
@@ -12,6 +14,13 @@ function Searchbarhooks ( {onFormSubmit}) {
         console.log ('Сработала функция handleQueryChange с применением хука оптимизации useCallback. Значение this.state.quiryWord :', quiryWord)
       }, [])
 
+      // const handleQueryChange = event => {
+      //   setQuiryWord ( event.currentTarget.value.toLowerCase() );
+       
+      //   console.log ('Сработала функция handleQueryChange . Значение this.state.quiryWord :', quiryWord)
+      // };
+
+
 
 
       const handleSubmit = event => {
@@ -19,7 +28,18 @@ function Searchbarhooks ( {onFormSubmit}) {
     
         // Проверяем не пустая ли строка в инпуте
         if (quiryWord.trim() === '') {
-        alert ("Введите поисковое слово!")
+        // alert ("Введите поисковое слово!");
+
+        toast.error("Введите поисковое слово!",  {
+          position: "top-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          })
+
           return;
         }
     
@@ -29,8 +49,21 @@ function Searchbarhooks ( {onFormSubmit}) {
       };
 
 
+     
       return (
         <header className={s.Searchbar}>
+
+<ToastContainer 
+          position="top-right"
+          autoClose={2500}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
 
             <form onSubmit={handleSubmit}  className={s.SearchForm}>
 
