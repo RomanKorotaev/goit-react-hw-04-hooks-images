@@ -42,7 +42,7 @@ const imageApiService = new ImageApiService();
       imageApiService.fetchImages()
       .then (hits=>{
             // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
-            if (hits.length !== 0) { 
+            if (hits.length > 1) { 
               setImagesArray ( [...hits ] ) // ВАЖНО СИНТАКСИС: именно так в данной функции записываем массив
               console.log (" Записали hits  в   - imagesArray через хуки (аналог componentDidUpdate )", imagesArray );
               setStatus ('resolved');
@@ -56,7 +56,21 @@ const imageApiService = new ImageApiService();
                   draggable: true,
                   progress: undefined,
               });  
-            } 
+            } else { 
+              console.log ("Нет картинок по такому поисковому слову!");
+              setStatus ('idel');
+
+              toast.info('Нет картинок по такому поисковому слову!', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+
+            }
       })
       .catch(err => {
         console.log ("err : ", err)
@@ -68,7 +82,7 @@ const imageApiService = new ImageApiService();
 }, [quiryWord] )
 
 
-console.log ("imagesArray после записи:", imagesArray)
+console.log ("imagesArray после срабатівания функции  useEffect :", imagesArray)
 
       const handleSummitForm = quiryWord => {
         console.log("Вызвана функция handleSummitForm = (quiryWord) : ", quiryWord);
