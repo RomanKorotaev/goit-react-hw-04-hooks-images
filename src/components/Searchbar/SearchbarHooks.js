@@ -3,6 +3,8 @@ import s from './Searchbar.module.css'
 import { ToastContainer , toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { ImSearch } from "react-icons/im";
+
 function Searchbarhooks ( {onFormSubmit}) {
 
     const [quiryWord, setQuiryWord] = useState ('')
@@ -68,6 +70,7 @@ function Searchbarhooks ( {onFormSubmit}) {
             <form onSubmit={handleSubmit}  className={s.SearchForm}>
 
                 <button type="submit" className={s.SearchFormButton}>
+                  <ImSearch style={{width: 25, height: 25 }}/>
                 <span className={s.SearchFormButtonLabel}>Search</span>
                 </button>
 
