@@ -109,7 +109,7 @@ console.log ("imagesArray после срабатівания функции  us
                        
                     toast.success('Success!', {
                             position: "top-right",
-                            autoClose: 4000,
+                            autoClose: 3000,
                             hideProgressBar: false,
                             closeOnClick: true,
                             pauseOnHover: true,
@@ -160,7 +160,7 @@ if (status==='resolved') {
     <>
          <ToastContainer
             position="top-right"
-            autoClose={4000}
+            autoClose={3000}
             hideProgressBar={false}
             newestOnTop={false}
             closeOnClick
