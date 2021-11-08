@@ -44,7 +44,7 @@ const imageApiService = new ImageApiService();
             // Перед записью данных в state  проверяем не пустой ли массив с полученными данными
             if (hits.length > 1) { 
               setImagesArray ( [...hits ] ) // ВАЖНО СИНТАКСИС: именно так в данной функции записываем массив
-              console.log (" Записали hits  в   - imagesArray через хуки (аналог componentDidUpdate )", imagesArray );
+              // console.log (" Записали hits  в   - imagesArray через хуки (аналог componentDidUpdate )", imagesArray );
               setStatus ('resolved');
 
                 toast.success('Success!', {
@@ -82,10 +82,10 @@ const imageApiService = new ImageApiService();
 }, [quiryWord] )
 
 
-console.log ("imagesArray после срабатівания функции  useEffect :", imagesArray)
+// console.log ("imagesArray после срабатівания функции  useEffect :", imagesArray)
 
       const handleSummitForm = quiryWord => {
-        console.log("Вызвана функция handleSummitForm = (quiryWord) : ", quiryWord);
+        // console.log("Вызвана функция handleSummitForm = (quiryWord) : ", quiryWord);
         setQuiryWord (quiryWord) ;
         
       }
@@ -93,9 +93,9 @@ console.log ("imagesArray после срабатівания функции  us
 
   // ------------------ Загрузить ещё  ------------------
       const handleLoadMore = () => {
-        console.log(" Сработала функция handleLoadMore - КНОПКА ЗАГРУЗИТЬ ЕЩЁ ");
+        // console.log(" Сработала функция handleLoadMore - КНОПКА ЗАГРУЗИТЬ ЕЩЁ ");
       
-        console.log("Значение поискового слова в классе : ", imageApiService.query)
+        // console.log("Значение поискового слова в классе : ", imageApiService.query)
        
             imageApiService.incerementPage();
       
@@ -104,7 +104,7 @@ console.log ("imagesArray после срабатівания функции  us
               if (hits.length !== 0) {
                   // Обновляем предыдущее состояние массива данных и дописываем новые элементы
                     setImagesArray ( (prevState) => [...prevState, ...hits]);
-                    console.log ("Запись массива через  ЗАГРУЗИТЬ ЕЩЁ" , imagesArray)
+                    // console.log ("Запись массива через  ЗАГРУЗИТЬ ЕЩЁ" , imagesArray)
                     setStatus ('resolved');
                        
                     toast.success('Success!', {
@@ -180,7 +180,7 @@ if (status==='resolved') {
       <ButtonHooks onLoadMoreBtn = {handleLoadMore}/>    
 
       { showModal && <ModalHooks onModalClose={toggleModal}>
-           <img src={largeImageURL} alt="picture" />
+           <img src={largeImageURL} alt="Some img" />
          </ModalHooks> }  
 
     </>)}
